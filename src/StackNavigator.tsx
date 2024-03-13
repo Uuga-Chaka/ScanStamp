@@ -3,13 +3,12 @@ import React from 'react'
 import { Routes } from './Routes'
 import { PermissionPage } from './PermissionPage'
 import { CameraContainer } from './CameraContainer'
-import { Camera } from 'react-native-vision-camera'
+import { Home } from './Home'
 const Stack = createStackNavigator<Routes>()
 export const StackNavigator = () => {
-  const cameraPermission = Camera.getCameraPermissionStatus()
-  const showPermissionsPage = cameraPermission !== 'granted'
   return (
-    <Stack.Navigator initialRouteName={showPermissionsPage ? 'PermissionPage' : 'CameraPage'}>
+    <Stack.Navigator initialRouteName={'Home'} screenOptions={{ headerShown: false }}>
+      <Stack.Screen name='Home' component={Home} />
       <Stack.Screen name='PermissionPage' component={PermissionPage} />
       <Stack.Screen name='CameraPage' component={CameraContainer} />
     </Stack.Navigator>

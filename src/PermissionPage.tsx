@@ -10,6 +10,10 @@ export const PermissionPage = () => {
   const [cameraPermissionStatus, setCameraPermissionStatus] =
     useState<CameraPermissionStatus>('not-determined')
 
+  useEffect(() => {
+    if (cameraPermissionStatus === 'granted') navigate('CameraPage')
+  }, [cameraPermissionStatus, navigate])
+
   const requestCameraPermission = useCallback(() => {
     console.log('Requesting camera permission...')
     Camera.requestCameraPermission()
@@ -20,10 +24,6 @@ export const PermissionPage = () => {
       })
       .catch((error) => console.error(error))
   }, [])
-
-  useEffect(() => {
-    if (cameraPermissionStatus === 'granted') navigate('CameraPage')
-  }, [cameraPermissionStatus, navigate])
 
   return (
     <View style={{ flex: 1, padding: 20, backgroundColor: '#fff' }}>

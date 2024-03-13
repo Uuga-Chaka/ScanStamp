@@ -1,6 +1,6 @@
 import { useIsFocused } from '@react-navigation/core'
 import React, { useCallback, useRef } from 'react'
-import { Alert, AlertButton, Linking, StyleSheet, Text, View } from 'react-native'
+import { Alert, AlertButton, Linking, StyleSheet, View } from 'react-native'
 import { Camera, Code, useCameraDevice, useCodeScanner } from 'react-native-vision-camera'
 const showCodeAlert = (value: string, onDismissed: () => void): void => {
   const buttons: AlertButton[] = [
@@ -14,9 +14,7 @@ const showCodeAlert = (value: string, onDismissed: () => void): void => {
     buttons.push({
       text: 'Open URL',
       onPress: () => {
-        Linking.openURL(value)
-          .then((e) => console.log(e))
-          .catch((err) => console.log(err))
+        Linking.openURL(value).catch((err) => console.log(err))
         onDismissed()
       },
     })
