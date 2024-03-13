@@ -13,6 +13,8 @@
     "fix:lintPrettier": "yarn prettierFixAll && yarn lintFixAll"
   },
   "dependencies": {
+    "@react-native-firebase/app": "^19.0.1",
+    "@react-native-firebase/database": "^19.0.1",
     "@react-navigation/native": "^6.1.16",
     "@react-navigation/stack": "^6.3.28",
     "react": "18.2.0",

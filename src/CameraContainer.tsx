@@ -1,7 +1,8 @@
 import { useIsFocused } from '@react-navigation/core'
 import React, { useCallback, useRef } from 'react'
-import { Alert, AlertButton, Linking, StyleSheet, View } from 'react-native'
+import { Alert, AlertButton, StyleSheet, View } from 'react-native'
 import { Camera, Code, useCameraDevice, useCodeScanner } from 'react-native-vision-camera'
+import api from '../services/api'
 const showCodeAlert = (value: string, onDismissed: () => void): void => {
   const buttons: AlertButton[] = [
     {
@@ -10,15 +11,13 @@ const showCodeAlert = (value: string, onDismissed: () => void): void => {
       onPress: onDismissed,
     },
   ]
-  if (value.startsWith('http')) {
-    buttons.push({
-      text: 'Open URL',
-      onPress: () => {
-        Linking.openURL(value).catch((err) => console.log(err))
-        onDismissed()
-      },
-    })
-  }
+  buttons.push({
+    text: 'Add user',
+    onPress: () => {
+      api.post(value, value).catch((er) => console.error(er))
+      onDismissed()
+    },
+  })
   Alert.alert('Scanned Code', value, buttons)
 }
 
