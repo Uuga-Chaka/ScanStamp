@@ -10,7 +10,7 @@ export const DialogContent = ({ onClose, onSubmit }: Props) => {
   return (
     <>
       <Dialog.Title>
-        <Text> This user has been added</Text>
+        <Text>Add user</Text>
       </Dialog.Title>
       <Dialog.Content>
         <Text>This user has been added</Text>
