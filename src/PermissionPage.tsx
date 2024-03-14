@@ -6,6 +6,7 @@ import { Routes } from './Routes'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { Button, Text } from 'react-native-paper'
 import { colors } from './theme'
+import { buttons } from '../localization/EN'
 
 export const PermissionPage = () => {
   const { navigate } = useNavigation<NavigationProp<Routes>>()
@@ -40,7 +41,7 @@ export const PermissionPage = () => {
     >
       {cameraPermissionStatus !== 'granted' && (
         <Button onPress={requestCameraPermission}>
-          <Text>Add permission</Text>
+          <Text>{buttons.addPermission}</Text>
         </Button>
       )}
     </View>

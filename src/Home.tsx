@@ -5,6 +5,7 @@ import { Routes } from './Routes'
 import { styles } from './theme'
 import { useCameraPermission } from 'react-native-vision-camera'
 import { Button, Text } from 'react-native-paper'
+import { buttons } from '../localization/EN'
 
 export const Home = () => {
   const { navigate } = useNavigation<NavigationProp<Routes>>()
@@ -25,7 +26,7 @@ export const Home = () => {
       }}
     >
       <Button mode='contained' onPress={handlePermission}>
-        <Text>Scan QR code</Text>
+        <Text>{buttons.scanQR}</Text>
       </Button>
     </View>
   )

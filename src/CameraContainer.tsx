@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback } from 'react'
 import { useIsFocused } from '@react-navigation/core'
 import { StyleSheet, View } from 'react-native'
 import { Camera, Code, useCameraDevice, useCodeScanner } from 'react-native-vision-camera'
