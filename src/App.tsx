@@ -4,6 +4,7 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 
 import { StackNavigator } from './StackNavigator'
+import { PaperProvider } from 'react-native-paper'
 
 // Docs
 // https://react-native-vision-camera.com/docs/guides
@@ -13,7 +14,9 @@ import { StackNavigator } from './StackNavigator'
 function App(): React.JSX.Element {
   return (
     <NavigationContainer>
-      <StackNavigator />
+      <PaperProvider>
+        <StackNavigator />
+      </PaperProvider>
     </NavigationContainer>
   )
 }
