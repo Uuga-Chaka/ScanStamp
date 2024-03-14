@@ -1,41 +1,35 @@
 import React, { useCallback, useState } from 'react'
 import { useIsFocused } from '@react-navigation/core'
-import { View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { Camera, Code, useCameraDevice, useCodeScanner } from 'react-native-vision-camera'
 import { Dialog } from 'react-native-paper'
-import { DialogContent } from './DialogContent'
 
-import api from '../services/api'
+import { AddUserDialog } from './AddUserDialog'
+import { UserExistDialog } from './UserExistDialog'
+
+import { useUserUplaod } from './hooks/useCheckUser'
 
 export const CameraContainer = () => {
   const device = useCameraDevice('back')
   const isFocused = useIsFocused()
 
-  const [QRCode, setQRCode] = useState('')
-  const [isShowingDialog, setIsShowingDialog] = useState(false)
-
-  const handleDismiss = () => setIsShowingDialog(false)
-  const handleSubmit = () => {
-    api
-      .post(QRCode, QRCode)
-      .then(() => {
-        console.log('Dissmised')
-        handleDismiss()
-      })
-      .catch((err) => {
-        console.error(err)
-        handleDismiss()
-      })
-  }
+  const {
+    handleSubmit,
+    openAddUser,
+    openUserExist,
+    setOpenAddUser,
+    setOpenUserExist,
+    setQRCode,
+    userExists,
+  } = useUserUplaod()
 
   const onCodeScanned = useCallback((codes: Code[]) => {
     const value = codes[0]?.value
-    if (value == null) return
-    if (isShowingDialog) return
-    setQRCode(() => {
-      setIsShowingDialog(true)
-      return value
-    })
+    if (!value) return
+    if (openAddUser || openUserExist) return
+    userExists(value)
+    setQRCode(value)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const codeScanner = useCodeScanner({
@@ -47,15 +41,18 @@ export const CameraContainer = () => {
     <View style={{ width: '100%', height: '100%' }}>
       {device != null && (
         <Camera
-          style={{ width: '100%', height: '100%', zIndex: 0 }}
+          style={StyleSheet.absoluteFill}
           device={device}
           isActive={isFocused}
           codeScanner={codeScanner}
           enableZoomGesture={true}
         />
       )}
-      <Dialog style={{ zIndex: 9999 }} visible={isShowingDialog} onDismiss={handleDismiss}>
-        <DialogContent onClose={handleDismiss} onSubmit={handleSubmit} />
+      <Dialog visible={openAddUser}>
+        <AddUserDialog onClose={() => setOpenAddUser(false)} onSubmit={handleSubmit} />
+      </Dialog>
+      <Dialog visible={openUserExist}>
+        <UserExistDialog onClose={() => setOpenUserExist(false)} />
       </Dialog>
     </View>
   )

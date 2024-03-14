@@ -4,20 +4,18 @@ import { buttons } from '../localization/EN'
 
 type Props = {
   onClose: () => void
-  onSubmit: () => void
 }
-export const DialogContent = ({ onClose, onSubmit }: Props) => {
+export const UserExistDialog = ({ onClose }: Props) => {
   return (
     <>
       <Dialog.Title>
-        <Text> This user has been added</Text>
+        <Text>Exists</Text>
       </Dialog.Title>
       <Dialog.Content>
         <Text>This user has been added</Text>
       </Dialog.Content>
       <Dialog.Actions>
         <Button onPress={onClose}>{buttons.done}</Button>
-        <Button onPress={onSubmit}>{buttons.submit}</Button>
       </Dialog.Actions>
     </>
   )
