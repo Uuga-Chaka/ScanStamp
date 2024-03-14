@@ -1,14 +1,17 @@
 import React from 'react'
 import { View } from 'react-native'
-import { Button } from './Components/Buttons/Button'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { Routes } from './Routes'
 import { styles } from './theme'
 import { useCameraPermission } from 'react-native-vision-camera'
+import { Button, Text } from 'react-native-paper'
 
 export const Home = () => {
   const { navigate } = useNavigation<NavigationProp<Routes>>()
   const { hasPermission } = useCameraPermission()
+
+  const handlePermission = () =>
+    hasPermission ? navigate('CameraPage') : navigate('PermissionPage')
 
   return (
     <View
@@ -21,14 +24,8 @@ export const Home = () => {
         justifyContent: 'center',
       }}
     >
-      <Button
-        onPress={() => {
-          hasPermission ? navigate('CameraPage') : navigate('PermissionPage')
-        }}
-        variant='filled'
-        color='info'
-      >
-        Scan QR code
+      <Button mode='contained' onPress={handlePermission}>
+        <Text>Scan QR code</Text>
       </Button>
     </View>
   )

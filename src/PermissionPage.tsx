@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from 'react'
-import { Linking, Text, View } from 'react-native'
+import { Linking, View } from 'react-native'
 
 import { Camera, CameraPermissionStatus } from 'react-native-vision-camera'
 import { Routes } from './Routes'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
+import { Button, Text } from 'react-native-paper'
 import { colors } from './theme'
 
 export const PermissionPage = () => {
@@ -26,9 +27,21 @@ export const PermissionPage = () => {
     if (cameraPermissionStatus === 'granted') navigate('CameraPage')
   }, [cameraPermissionStatus, navigate])
   return (
-    <View style={{ flex: 1, padding: 20, backgroundColor: colors.white }}>
+    <View
+      style={{
+        flex: 1,
+        height: '100%',
+        width: '100%',
+        padding: 20,
+        backgroundColor: colors.white,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       {cameraPermissionStatus !== 'granted' && (
-        <Text onPress={requestCameraPermission}>PermissionPage</Text>
+        <Button onPress={requestCameraPermission}>
+          <Text>Add permission</Text>
+        </Button>
       )}
     </View>
   )
