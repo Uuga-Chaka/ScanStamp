@@ -4,9 +4,9 @@ import { useIsFocused } from '@react-navigation/core'
 import { Camera, Code, useCameraDevice, useCodeScanner } from 'react-native-vision-camera'
 import { Dialog } from 'react-native-paper'
 
-import { useUserUplaod } from 'hooks/useCheckUser'
 import { AddUserDialog } from './AddUserDialog'
 import { UserExistDialog } from './UserExistDialog'
+import { useUserUplaod } from '../../hooks/useCheckUser'
 
 export const CameraContainer = () => {
   const device = useCameraDevice('back')

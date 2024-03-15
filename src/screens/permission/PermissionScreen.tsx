@@ -6,8 +6,8 @@ import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { Button, Text } from 'react-native-paper'
 
 import { buttons } from '../../../localization/EN'
-import { RoutesTypes } from 'routes/Routes'
-import { colors } from 'theme'
+import { RoutesTypes } from '../../routes/Routes'
+import { colors } from '../../theme'
 
 export const PermissionScreen = () => {
   const { navigate } = useNavigation<NavigationProp<RoutesTypes>>()

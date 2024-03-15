@@ -5,10 +5,9 @@ import { useCameraPermission } from 'react-native-vision-camera'
 
 import { Button, Text } from 'react-native-paper'
 
-import { RoutesTypes } from 'routes/Routes'
-import { styles } from 'theme'
-
 import { buttons } from '../../../localization/EN'
+import { styles } from '../../theme'
+import { RoutesTypes } from '../../routes/Routes'
 
 export const HomeScreen = () => {
   const { navigate } = useNavigation<NavigationProp<RoutesTypes>>()
