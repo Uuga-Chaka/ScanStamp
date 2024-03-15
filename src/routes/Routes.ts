@@ -1,6 +1,8 @@
 export type RoutesTypes = {
-  Home: undefined
-  PermissionPage: undefined
-  CameraPage: undefined
-  CodeScannerPage: undefined
+  CameraScreen: undefined
+  CantUseScreen: undefined
+  HomeScreen: undefined
+  LoginScreen: undefined
+  PermissionScreen: undefined
+  RegisterScreen: undefined
 }

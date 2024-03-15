@@ -15,7 +15,7 @@ export const HomeScreen = () => {
   const { hasPermission } = useCameraPermission()
 
   const handlePermission = () =>
-    hasPermission ? navigate('CameraPage') : navigate('PermissionPage')
+    hasPermission ? navigate('CameraScreen') : navigate('PermissionScreen')
   return (
     <View
       style={{

@@ -26,7 +26,7 @@ export const PermissionScreen = () => {
   }, [])
 
   useEffect(() => {
-    if (cameraPermissionStatus === 'granted') navigate('CameraPage')
+    if (cameraPermissionStatus === 'granted') navigate('CameraScreen')
   }, [cameraPermissionStatus, navigate])
   return (
     <View

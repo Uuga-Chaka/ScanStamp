@@ -9,10 +9,10 @@ import { CameraContainer } from 'screens/camera/CameraScreen'
 const Stack = createStackNavigator<RoutesTypes>()
 export const Routes = () => {
   return (
-    <Stack.Navigator initialRouteName={'Home'} screenOptions={{ headerShown: false }}>
-      <Stack.Screen name='Home' component={HomeScreen} />
-      <Stack.Screen name='PermissionPage' component={PermissionScreen} />
-      <Stack.Screen name='CameraPage' component={CameraContainer} />
+    <Stack.Navigator initialRouteName={'HomeScreen'} screenOptions={{ headerShown: false }}>
+      <Stack.Screen name='HomeScreen' component={HomeScreen} />
+      <Stack.Screen name='PermissionScreen' component={PermissionScreen} />
+      <Stack.Screen name='CameraScreen' component={CameraContainer} />
     </Stack.Navigator>
   )
 }
