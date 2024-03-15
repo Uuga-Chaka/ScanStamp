@@ -2,14 +2,15 @@ import { useCallback, useEffect, useState } from 'react'
 import { Linking, View } from 'react-native'
 
 import { Camera, CameraPermissionStatus } from 'react-native-vision-camera'
-import { Routes } from './Routes'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { Button, Text } from 'react-native-paper'
-import { colors } from './theme'
-import { buttons } from '../localization/EN'
 
-export const PermissionPage = () => {
-  const { navigate } = useNavigation<NavigationProp<Routes>>()
+import { buttons } from '../../../localization/EN'
+import { RoutesTypes } from 'routes/Routes'
+import { colors } from 'theme'
+
+export const PermissionScreen = () => {
+  const { navigate } = useNavigation<NavigationProp<RoutesTypes>>()
   const [cameraPermissionStatus, setCameraPermissionStatus] =
     useState<CameraPermissionStatus>('not-determined')
 

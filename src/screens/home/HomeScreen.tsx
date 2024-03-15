@@ -1,19 +1,21 @@
 import React from 'react'
 import { View } from 'react-native'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
-import { Routes } from './Routes'
-import { styles } from './theme'
 import { useCameraPermission } from 'react-native-vision-camera'
-import { Button, Text } from 'react-native-paper'
-import { buttons } from '../localization/EN'
 
-export const Home = () => {
-  const { navigate } = useNavigation<NavigationProp<Routes>>()
+import { Button, Text } from 'react-native-paper'
+
+import { RoutesTypes } from 'routes/Routes'
+import { styles } from 'theme'
+
+import { buttons } from '../../../localization/EN'
+
+export const HomeScreen = () => {
+  const { navigate } = useNavigation<NavigationProp<RoutesTypes>>()
   const { hasPermission } = useCameraPermission()
 
   const handlePermission = () =>
     hasPermission ? navigate('CameraPage') : navigate('PermissionPage')
-
   return (
     <View
       style={{

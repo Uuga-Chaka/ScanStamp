@@ -3,8 +3,8 @@ import React from 'react'
 
 import { NavigationContainer } from '@react-navigation/native'
 
-import { StackNavigator } from './StackNavigator'
 import { PaperProvider } from 'react-native-paper'
+import { Routes } from './routes'
 
 // Docs
 // https://react-native-vision-camera.com/docs/guides
@@ -15,7 +15,7 @@ function App(): React.JSX.Element {
   return (
     <NavigationContainer>
       <PaperProvider>
-        <StackNavigator />
+        <Routes />
       </PaperProvider>
     </NavigationContainer>
   )

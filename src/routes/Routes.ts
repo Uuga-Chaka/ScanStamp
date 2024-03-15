@@ -1,4 +1,4 @@
-export type Routes = {
+export type RoutesTypes = {
   Home: undefined
   PermissionPage: undefined
   CameraPage: undefined
