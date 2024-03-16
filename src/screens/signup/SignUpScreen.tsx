@@ -1,19 +1,47 @@
 import React, { useState } from 'react'
 import { Pressable, View } from 'react-native'
-import { Button, Checkbox, Text, TextInput, useTheme } from 'react-native-paper'
-import { ScrollView } from 'react-native-gesture-handler'
 
-import { styles } from '../../theme'
-import { common, input, textNavigation } from '../../../localization/EN'
+import { Button, Checkbox, Text, TextInput, useTheme } from 'react-native-paper'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { ScrollView } from 'react-native-gesture-handler'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+
+import { common, input, textNavigation } from '../../../localization/EN'
 import { RoutesTypes } from '../../routes/Routes'
+import { styles } from '../../theme'
 
 type SignUpScreenProps = NativeStackScreenProps<RoutesTypes, 'SignUpScreen'>
+
+type ISignUpForm = {
+  email: string
+  validateEmail: string
+  password: string
+  validatePassword: string
+  acceptPolicy: boolean
+}
+
+const signUpSchema = yup.object({
+  email: yup.string().email().required(),
+  validateEmail: yup.string().email().required(),
+  password: yup.string().email().required(),
+  validatePassword: yup.string().email().required(),
+  acceptPolicy: yup.bool().isTrue().required(),
+})
+
 export const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
-  const [acceptPolicy, setAcceptPolicy] = useState(false)
   const theme = useTheme()
+  const { setValue, handleSubmit } = useForm<ISignUpForm>({
+    resolver: yupResolver<ISignUpForm>(signUpSchema),
+  })
+
+  const [acceptPolicy, setAcceptPolicy] = useState(false)
 
   const goToLogin = () => navigation.navigate('LoginScreen')
+  const submit = () => {
+    handleSubmit((data) => console.log(data))
+  }
 
   return (
     <ScrollView style={{ ...styles.container }}>
@@ -22,7 +50,7 @@ export const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
           {common.signUp}
         </Text>
         <View style={{ display: 'flex', gap: 30, marginBottom: 60, marginTop: 60 }}>
-          <TextInput mode='outlined' label={input.email} />
+          <TextInput mode='outlined' label={input.email} onChange={(e) => e} />
           <TextInput mode='outlined' label={input.validateEmail} />
           <TextInput mode='outlined' secureTextEntry label={input.password} />
           <TextInput mode='outlined' secureTextEntry label={input.validatePassword} />
@@ -51,7 +79,9 @@ export const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
             </Pressable>
           </View>
         </View>
-        <Button mode='contained'>{common.signUp}</Button>
+        <Button mode='contained' onPress={submit}>
+          {common.signUp}
+        </Button>
         <View
           style={{ display: 'flex', marginTop: 20, flexDirection: 'row', justifyContent: 'center' }}
         >
