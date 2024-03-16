@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Dialog, Text } from 'react-native-paper'
-import { buttons, cameraDialog } from '../localization/EN'
+
+import { buttons, cameraDialog } from '../../../localization/EN'
 
 type Props = {
   onClose: () => void

@@ -1,13 +1,12 @@
 import React, { useCallback } from 'react'
-import { useIsFocused } from '@react-navigation/core'
 import { StyleSheet, View } from 'react-native'
+import { useIsFocused } from '@react-navigation/core'
 import { Camera, Code, useCameraDevice, useCodeScanner } from 'react-native-vision-camera'
 import { Dialog } from 'react-native-paper'
 
 import { AddUserDialog } from './AddUserDialog'
 import { UserExistDialog } from './UserExistDialog'
-
-import { useUserUplaod } from './hooks/useCheckUser'
+import { useUserUplaod } from '../../hooks/useCheckUser'
 
 export const CameraContainer = () => {
   const device = useCameraDevice('back')
