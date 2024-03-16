@@ -1,20 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
-import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { useCameraPermission } from 'react-native-vision-camera'
-
-import { Button, Text } from 'react-native-paper'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
+import { Button } from 'react-native-paper'
 
 import { buttons } from '../../../localization/EN'
 import { styles } from '../../theme'
 import { RoutesTypes } from '../../routes/Routes'
+import { useAuthStore } from '../../store'
 
-export const HomeScreen = () => {
-  const { navigate } = useNavigation<NavigationProp<RoutesTypes>>()
+type HomeScreenProps = NativeStackScreenProps<RoutesTypes, 'HomeScreen'>
+
+export const HomeScreen = ({ navigation }: HomeScreenProps) => {
   const { hasPermission } = useCameraPermission()
 
+  const [initialazing, setInitialazing] = useState(true)
+  const currentUser = useAuthStore((authStore) => authStore.currentUser)
+  const setCurrentUser = useAuthStore((authStore) => authStore.updateCurrentUser)
+
+  function onAuthStateChanged(user: FirebaseAuthTypes.User | null) {
+    setCurrentUser(user)
+    if (initialazing) setInitialazing(false)
+  }
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged)
+    return subscriber
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  if (initialazing) return
+  if (!currentUser) navigation.navigate('SignUpScreen')
+
   const handlePermission = () =>
-    hasPermission ? navigate('CameraScreen') : navigate('PermissionScreen')
+    hasPermission ? navigation.navigate('CameraScreen') : navigation.navigate('PermissionScreen')
   return (
     <View
       style={{
@@ -27,7 +47,7 @@ export const HomeScreen = () => {
       }}
     >
       <Button mode='contained' onPress={handlePermission}>
-        <Text>{buttons.scanQR}</Text>
+        {buttons.scanQR}
       </Button>
     </View>
   )

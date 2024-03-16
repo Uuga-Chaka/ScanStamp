@@ -2,8 +2,9 @@ import 'react-native-gesture-handler'
 import React from 'react'
 
 import { NavigationContainer } from '@react-navigation/native'
-
 import { PaperProvider } from 'react-native-paper'
+import { SafeAreaView } from 'react-native-safe-area-context'
+
 import { Routes } from './routes'
 
 // Docs
@@ -15,7 +16,9 @@ function App(): React.JSX.Element {
   return (
     <NavigationContainer>
       <PaperProvider>
-        <Routes />
+        <SafeAreaView style={{ flex: 1 }}>
+          <Routes />
+        </SafeAreaView>
       </PaperProvider>
     </NavigationContainer>
   )

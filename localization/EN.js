@@ -1,4 +1,8 @@
 module.exports = {
+  common: {
+    signUp: 'Sign Up',
+    logIn: 'Log In',
+  },
   buttons: {
     done: 'Done',
     submit: 'Submit',
@@ -6,8 +10,6 @@ module.exports = {
     no: 'No',
     addPermission: 'Add permission',
     scanQR: 'Scan QR code',
-    signUp: 'Sign Up',
-    logIn: 'Log In',
   },
   cameraDialog: {
     exist: 'Exists',
@@ -21,8 +23,10 @@ module.exports = {
     validateEmail: 'Validate Email',
     validatePassword: 'Validate Password',
   },
-  title: {
-    signUp: 'Sign Up',
-    logIn: 'Log In',
+  textNavigation: {
+    accept: 'I accept the ',
+    terms: 'Terms & Conditions.',
+    alreadyHaveAccount: 'Do you already have an account?',
+    dontHaveAccount: "You don't have an account?",
   },
 }

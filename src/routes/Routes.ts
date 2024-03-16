@@ -4,5 +4,5 @@ export type RoutesTypes = {
   HomeScreen: undefined
   LoginScreen: undefined
   PermissionScreen: undefined
-  RegisterScreen: undefined
+  SignUpScreen: undefined
 }

@@ -1,16 +1,16 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Linking, View } from 'react-native'
-
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { Camera, CameraPermissionStatus } from 'react-native-vision-camera'
-import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { Button, Text } from 'react-native-paper'
 
 import { buttons } from '../../../localization/EN'
 import { RoutesTypes } from '../../routes/Routes'
 import { colors } from '../../theme'
 
-export const PermissionScreen = () => {
-  const { navigate } = useNavigation<NavigationProp<RoutesTypes>>()
+type SignUpScreenProps = NativeStackScreenProps<RoutesTypes, 'PermissionScreen'>
+
+export const PermissionScreen = ({ navigation }: SignUpScreenProps) => {
   const [cameraPermissionStatus, setCameraPermissionStatus] =
     useState<CameraPermissionStatus>('not-determined')
 
@@ -26,8 +26,8 @@ export const PermissionScreen = () => {
   }, [])
 
   useEffect(() => {
-    if (cameraPermissionStatus === 'granted') navigate('CameraScreen')
-  }, [cameraPermissionStatus, navigate])
+    if (cameraPermissionStatus === 'granted') navigation.navigate('CameraScreen')
+  }, [cameraPermissionStatus, navigation])
   return (
     <View
       style={{

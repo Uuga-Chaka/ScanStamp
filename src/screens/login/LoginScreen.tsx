@@ -1,10 +1,19 @@
 import React from 'react'
-import { View } from 'react-native'
+import { Pressable, View } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
-import { styles } from '../../theme'
-import { buttons, input, title } from '../../../localization/EN'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
-export const LoginScreen = () => {
+import { common, input, textNavigation } from '../../../localization/EN'
+import { styles } from '../../theme'
+import { RoutesTypes } from '../../routes/Routes'
+
+type LoginScreenProps = NativeStackScreenProps<RoutesTypes, 'LoginScreen'>
+export const LoginScreen = ({ navigation }: LoginScreenProps) => {
+  const goToSignUp = () => {
+    console.log('triggered')
+    navigation.navigate('SignUpScreen')
+  }
+
   return (
     <View
       style={{
@@ -15,13 +24,21 @@ export const LoginScreen = () => {
       }}
     >
       <Text style={{ fontWeight: 'bold', marginLeft: 5 }} variant='displaySmall'>
-        {title.logIn}
+        {common.logIn}
       </Text>
       <View style={{ display: 'flex', gap: 30, marginBottom: 60, marginTop: 60 }}>
         <TextInput mode='outlined' label={input.email} />
         <TextInput mode='outlined' secureTextEntry label={input.password} />
       </View>
-      <Button mode='contained'>{buttons.logIn}</Button>
+      <Button mode='contained'>{common.logIn}</Button>
+      <View
+        style={{ display: 'flex', marginTop: 20, flexDirection: 'row', justifyContent: 'center' }}
+      >
+        <Text>{textNavigation.dontHaveAccount} </Text>
+        <Pressable onPress={goToSignUp}>
+          <Text> {common.signUp}</Text>
+        </Pressable>
+      </View>
     </View>
   )
 }
