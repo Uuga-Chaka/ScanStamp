@@ -1,6 +1,6 @@
 import React from 'react'
 import { Pressable, View } from 'react-native'
-import { Button, Text, TextInput } from 'react-native-paper'
+import { Button, Text, TextInput, useTheme } from 'react-native-paper'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
 import { common, input, textNavigation } from '../../../localization/EN'
@@ -9,10 +9,9 @@ import { RoutesTypes } from '../../routes/Routes'
 
 type LoginScreenProps = NativeStackScreenProps<RoutesTypes, 'LoginScreen'>
 export const LoginScreen = ({ navigation }: LoginScreenProps) => {
-  const goToSignUp = () => {
-    console.log('triggered')
-    navigation.navigate('SignUpScreen')
-  }
+  const theme = useTheme()
+
+  const goToSignUp = () => navigation.navigate('SignUpScreen')
 
   return (
     <View
@@ -36,7 +35,7 @@ export const LoginScreen = ({ navigation }: LoginScreenProps) => {
       >
         <Text>{textNavigation.dontHaveAccount} </Text>
         <Pressable onPress={goToSignUp}>
-          <Text> {common.signUp}</Text>
+          <Text style={{ color: theme.colors.primary }}> {common.signUp}</Text>
         </Pressable>
       </View>
     </View>
