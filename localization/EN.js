@@ -24,7 +24,7 @@ module.exports = {
     validatePassword: 'Validate Password',
   },
   textNavigation: {
-    accept: 'I accept the ',
+    accept: 'I accept the',
     terms: 'Terms & Conditions.',
     alreadyHaveAccount: 'Do you already have an account?',
     dontHaveAccount: "You don't have an account?",
