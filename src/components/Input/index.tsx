@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import { Checkbox, TextInput } from 'react-native-paper'
 import { Control, Controller, FieldValues, Path } from 'react-hook-form'
 import { Pressable, View } from 'react-native'
@@ -15,35 +15,35 @@ type TextInputQRProps<T extends FieldValues, Q> = {
   control: Control<T, Q>
 }
 
-const CheckBoxQR = <T extends FieldValues, Q>({ label, name, control }: CheckBoxQRProps<T, Q>) => {
+const Form = ({ children }: { children: ReactNode }) => {
+  return <>{children}</>
+}
+
+const CheckBox = <T extends FieldValues, Q>({ label, name, control }: CheckBoxQRProps<T, Q>) => {
   return (
     <Controller
       control={control}
       name={name}
-      render={({ field: { onChange, onBlur, value = false } }) => (
-        <Pressable
+      render={({ field: { onChange, value = false } }) => (
+        <View
           style={{
             display: 'flex',
             flexDirection: 'row',
             alignContent: 'center',
             alignItems: 'center',
           }}
-          onBlur={onBlur}
-          onPress={() => onChange(!value)}
         >
-          <Checkbox status={value ? 'checked' : 'unchecked'} />
-          {label && <View style={{ marginLeft: 5 }}>{label}</View>}
-        </Pressable>
+          <Pressable style={{ marginRight: 5 }}>
+            <Checkbox status={value ? 'checked' : 'unchecked'} onPress={() => onChange(!value)} />
+          </Pressable>
+          {label && label}
+        </View>
       )}
     />
   )
 }
 
-const TextInputQR = <T extends FieldValues, Q>({
-  label,
-  name,
-  control,
-}: TextInputQRProps<T, Q>) => {
+const InputText = <T extends FieldValues, Q>({ label, name, control }: TextInputQRProps<T, Q>) => {
   return (
     <Controller
       control={control}
@@ -61,8 +61,4 @@ const TextInputQR = <T extends FieldValues, Q>({
   )
 }
 
-const Form = ({ children }: { children: ReactElement }) => {
-  return <>{() => children}</>
-}
-
-export default Object.assign(Form, { TextInputQR, CheckBoxQR })
+export const QRForm = Object.assign(Form, { InputText, CheckBox })
