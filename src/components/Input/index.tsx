@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react'
-import { Checkbox, TextInput } from 'react-native-paper'
+import React, { ReactNode, useState } from 'react'
+import { Checkbox, TextInput, TextInputProps } from 'react-native-paper'
 import { Control, Controller, FieldValues, Path } from 'react-hook-form'
 import { Pressable, View } from 'react-native'
 
@@ -13,7 +13,7 @@ type TextInputQRProps<T extends FieldValues, Q> = {
   label: string
   name: Path<T>
   control: Control<T, Q>
-}
+} & TextInputProps
 
 const Form = ({ children }: { children: ReactNode }) => {
   return <>{children}</>
@@ -43,19 +43,38 @@ const CheckBox = <T extends FieldValues, Q>({ label, name, control }: CheckBoxQR
   )
 }
 
-const InputText = <T extends FieldValues, Q>({ label, name, control }: TextInputQRProps<T, Q>) => {
+const InputText = <T extends FieldValues, Q>({
+  label,
+  name,
+  control,
+  secureTextEntry,
+  ...props
+}: TextInputQRProps<T, Q>) => {
+  const [secured, setSecured] = useState(secureTextEntry)
   return (
     <Controller
       control={control}
       name={name}
       render={({ field: { onChange, onBlur, value } }) => (
-        <TextInput
-          mode='outlined'
-          label={label}
-          onBlur={onBlur}
-          onChangeText={(val) => onChange(val)}
-          value={value}
-        />
+        <>
+          <TextInput
+            {...props}
+            mode='outlined'
+            label={label}
+            onBlur={onBlur}
+            onChangeText={(val) => onChange(val)}
+            value={value}
+            secureTextEntry={secured}
+            right={
+              secureTextEntry ? (
+                <TextInput.Icon
+                  icon={secured ? 'eye-off' : 'eye'}
+                  onPress={() => setSecured(!secured)}
+                />
+              ) : null
+            }
+          />
+        </>
       )}
     />
   )

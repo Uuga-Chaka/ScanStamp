@@ -67,11 +67,17 @@ export const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
           <QRForm>
             <QRForm.InputText control={control} name='email' label={input.email} />
             <QRForm.InputText control={control} name='validateEmail' label={input.validateEmail} />
-            <QRForm.InputText control={control} name='password' label={input.password} />
+            <QRForm.InputText
+              control={control}
+              name='password'
+              label={input.password}
+              secureTextEntry
+            />
             <QRForm.InputText
               control={control}
               name='validatePassword'
               label={input.validatePassword}
+              secureTextEntry
             />
             <View
               style={{
