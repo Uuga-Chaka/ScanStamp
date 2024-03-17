@@ -56,25 +56,25 @@ const InputText = <T extends FieldValues, Q>({
       control={control}
       name={name}
       render={({ field: { onChange, onBlur, value } }) => (
-        <>
-          <TextInput
-            {...props}
-            mode='outlined'
-            label={label}
-            onBlur={onBlur}
-            onChangeText={(val) => onChange(val)}
-            value={value}
-            secureTextEntry={secured}
-            right={
-              secureTextEntry ? (
-                <TextInput.Icon
-                  icon={secured ? 'eye-off' : 'eye'}
-                  onPress={() => setSecured(!secured)}
-                />
-              ) : null
-            }
-          />
-        </>
+        <TextInput
+          {...props}
+          mode='outlined'
+          label={label}
+          onBlur={onBlur}
+          onChangeText={(val) => onChange(val)}
+          value={value}
+          secureTextEntry={secured}
+          right={
+            secureTextEntry ? (
+              <TextInput.Icon
+                icon={secured ? 'eye-off' : 'eye'}
+                focusable={false}
+                onPress={() => setSecured(!secured)}
+                forceTextInputFocus
+              />
+            ) : null
+          }
+        />
       )}
     />
   )

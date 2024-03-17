@@ -65,7 +65,7 @@ export const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
         </Text>
         <View style={{ display: 'flex', gap: 30, marginBottom: 60, marginTop: 60 }}>
           <QRForm>
-            <QRForm.InputText control={control} name='email' label={input.email} />
+            <QRForm.InputText control={control} name='email' label={input.email} autoFocus />
             <QRForm.InputText control={control} name='validateEmail' label={input.validateEmail} />
             <QRForm.InputText
               control={control}
