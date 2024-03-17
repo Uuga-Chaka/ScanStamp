@@ -30,11 +30,10 @@ const signUpSchema = yup.object({
     .oneOf([yup.ref('email'), ''], 'Does not match')
     .email()
     .required(),
-  password: yup.string().email().required(),
+  password: yup.string().required(),
   validatePassword: yup
     .string()
     .oneOf([yup.ref('password'), ''], 'Does not match')
-    .email()
     .required(),
   acceptPolicy: yup.bool().isTrue().required(),
 })
@@ -43,14 +42,24 @@ export const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
   const theme = useTheme()
   const { control, handleSubmit } = useForm<ISignUpForm>({
     resolver: yupResolver<ISignUpForm>(signUpSchema),
+    defaultValues: {
+      acceptPolicy: false,
+      email: '',
+      validateEmail: '',
+      password: '',
+      validatePassword: '',
+    },
   })
 
   const goToLogin = () => navigation.navigate('LoginScreen')
-  const submit = () => handleSubmit((data) => console.log(data))
+
+  const submit = () => {
+    return handleSubmit((data) => console.log(data))
+  }
 
   return (
     <ScrollView style={{ ...styles.container }}>
-      <View style={{ paddingVertical: 100 }}>
+      <View style={{ paddingTop: 100 }}>
         <Text style={{ fontWeight: 'bold', marginLeft: 5 }} variant='displaySmall'>
           {common.signUp}
         </Text>
@@ -87,7 +96,7 @@ export const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
             </View>
           </QRForm>
         </View>
-        <Button mode='contained' onPress={submit}>
+        <Button mode='contained' onPress={void submit()}>
           {common.signUp}
         </Button>
         <View
