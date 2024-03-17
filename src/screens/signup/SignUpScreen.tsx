@@ -12,6 +12,7 @@ import { common, input, textNavigation } from '../../../localization/EN'
 import { RoutesTypes } from '../../routes/Routes'
 import { styles } from '../../theme'
 import { QRForm } from '../../components/Input'
+import { signUpUser } from '../../../services/auth'
 
 type SignUpScreenProps = NativeStackScreenProps<RoutesTypes, 'SignUpScreen'>
 
@@ -40,7 +41,11 @@ const signUpSchema = yup.object({
 
 export const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
   const theme = useTheme()
-  const { control, handleSubmit } = useForm<ISignUpForm>({
+  const {
+    control,
+    handleSubmit,
+    formState: { isValid, isDirty },
+  } = useForm<ISignUpForm>({
     resolver: yupResolver<ISignUpForm>(signUpSchema),
     defaultValues: {
       acceptPolicy: false,
@@ -53,9 +58,7 @@ export const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
 
   const goToLogin = () => navigation.navigate('LoginScreen')
 
-  const submit = () => {
-    return handleSubmit((data) => console.log(data))
-  }
+  const submit = () => handleSubmit(({ password, email }) => signUpUser({ password, email }))
 
   return (
     <ScrollView style={{ ...styles.container }}>
@@ -102,7 +105,7 @@ export const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
             </View>
           </QRForm>
         </View>
-        <Button mode='contained' onPress={void submit()}>
+        <Button mode='contained' onPress={submit()} disabled={!isDirty || !isValid}>
           {common.signUp}
         </Button>
         <View

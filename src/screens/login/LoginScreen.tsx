@@ -1,15 +1,16 @@
 import React from 'react'
 import { Pressable, View } from 'react-native'
-import { Button, Text, TextInput, useTheme } from 'react-native-paper'
+import { Button, Text, useTheme } from 'react-native-paper'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useForm } from 'react-hook-form'
 
 import { common, input, textNavigation } from '../../../localization/EN'
 import { styles } from '../../theme'
 import { RoutesTypes } from '../../routes/Routes'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useForm } from 'react-hook-form'
 import { QRForm } from '../../components/Input'
+import { loginUser } from '../../../services/auth'
 
 type LoginScreenProps = NativeStackScreenProps<RoutesTypes, 'LoginScreen'>
 
@@ -34,7 +35,7 @@ export const LoginScreen = ({ navigation }: LoginScreenProps) => {
     },
   })
 
-  const submit = () => handleSubmit((data) => console.log(data))
+  const submit = () => handleSubmit((data) => loginUser(data))
 
   const goToSignUp = () => navigation.navigate('SignUpScreen')
 
@@ -61,7 +62,7 @@ export const LoginScreen = ({ navigation }: LoginScreenProps) => {
           />
         </QRForm>
       </View>
-      <Button mode='contained' onPress={void submit()}>
+      <Button mode='contained' onPress={submit()}>
         {common.logIn}
       </Button>
       <View

@@ -26,6 +26,7 @@
     "no-use-before-define": "off",
     "no-empty": "off",
     "@typescript-eslint/no-use-before-define": ["error"],
+    "@typescript-eslint/no-misused-promises": [2, { "checksVoidReturn": { "attributes": false } }],
     "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/unbound-method": "off",
     "react/react-in-jsx-scope": "off",
