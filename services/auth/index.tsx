@@ -1,6 +1,6 @@
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
 
-export const createUser = ({ email, password }: { email: string; password: string }) => {
+export const signUpUser = ({ email, password }: { email: string; password: string }) => {
   auth()
     .createUserWithEmailAndPassword(email, password)
     .then(() => console.log('Success'))
@@ -20,4 +20,11 @@ export const loginUser = ({ email, password }: { email: string; password: string
     .catch((err: FirebaseAuthTypes.NativeFirebaseAuthError) => {
       console.error(err.code)
     })
+}
+
+export const signOut = () => {
+  auth()
+    .signOut()
+    .then((data) => console.log(data))
+    .catch((err) => console.error(err))
 }
