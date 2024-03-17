@@ -27,7 +27,11 @@ const logInSchema = yup.object({
 export const LoginScreen = ({ navigation }: LoginScreenProps) => {
   const theme = useTheme()
 
-  const { control, handleSubmit } = useForm<ILoginForm>({
+  const {
+    control,
+    handleSubmit,
+    formState: { isValid, isDirty },
+  } = useForm<ILoginForm>({
     resolver: yupResolver<ILoginForm>(logInSchema),
     defaultValues: {
       email: '',
@@ -62,7 +66,7 @@ export const LoginScreen = ({ navigation }: LoginScreenProps) => {
           />
         </QRForm>
       </View>
-      <Button mode='contained' onPress={submit()}>
+      <Button mode='contained' onPress={submit()} disabled={!isValid || !isDirty}>
         {common.logIn}
       </Button>
       <View

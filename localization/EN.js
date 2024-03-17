@@ -10,6 +10,7 @@ module.exports = {
     no: 'No',
     addPermission: 'Add permission',
     scanQR: 'Scan QR code',
+    signOut: 'Sign Out',
   },
   cameraDialog: {
     exist: 'Exists',

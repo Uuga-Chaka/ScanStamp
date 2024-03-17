@@ -21,3 +21,10 @@ export const loginUser = ({ email, password }: { email: string; password: string
       console.error(err.code)
     })
 }
+
+export const signOut = () => {
+  auth()
+    .signOut()
+    .then((data) => console.log(data))
+    .catch((err) => console.error(err))
+}
