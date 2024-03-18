@@ -5,4 +5,5 @@ export type RoutesTypes = {
   LoginScreen: undefined
   PermissionScreen: undefined
   SignUpScreen: undefined
+  NoVerified: undefined
 }
