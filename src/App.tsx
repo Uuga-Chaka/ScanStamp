@@ -6,6 +6,7 @@ import { PaperProvider } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { Routes } from './routes'
+import errorHandler from '../utils/ErrorHandler'
 
 // Docs
 // https://react-native-vision-camera.com/docs/guides
@@ -13,6 +14,7 @@ import { Routes } from './routes'
 // https://github.com/mrousavy/react-native-vision-camera
 
 function App(): React.JSX.Element {
+  ErrorUtils.setGlobalHandler(errorHandler)
   return (
     <NavigationContainer>
       <PaperProvider>
