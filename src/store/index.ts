@@ -1,8 +1,10 @@
 import { FirebaseAuthTypes } from '@react-native-firebase/auth'
 import { create } from 'zustand'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 type State = {
-  currentUser: FirebaseAuthTypes.User | null
+  currentUser: (FirebaseAuthTypes.User & { verified: boolean }) | null
 }
 
 type Action = {

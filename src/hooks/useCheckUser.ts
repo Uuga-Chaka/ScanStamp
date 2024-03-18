@@ -9,7 +9,7 @@ export const useUserUplaod = () => {
 
   const handleSubmit = () => {
     api
-      .post(QRCode, QRCode)
+      .post(`user/${QRCode}`, QRCode)
       .then(() => {
         console.log('Dissmised')
         setOpenAddUser(false)
@@ -22,7 +22,7 @@ export const useUserUplaod = () => {
 
   const userExists = (value: string) => {
     api
-      .get(value)
+      .get(`user/${value}`)
       .then((res) => {
         if (res.val()) setOpenUserExist(true)
         else setOpenAddUser(true)
