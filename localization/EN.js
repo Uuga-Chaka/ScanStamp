@@ -12,6 +12,14 @@ module.exports = {
     scanQR: 'Scan QR code',
     signOut: 'Sign Out',
   },
+  errMsg: {
+    requiredEmail: 'Email is required',
+    passwordRequired: 'Password is requires',
+    invalidEmail: 'Email is invalid',
+    passwordShort: 'Password is too short',
+    noSamePassword: 'Passwords are not equal',
+    noSameEmail: 'Emails are not equal',
+  },
   cameraDialog: {
     exist: 'Exists',
     userAdded: 'This already exists',
