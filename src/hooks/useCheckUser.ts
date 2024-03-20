@@ -24,7 +24,7 @@ export const useUserUplaod = () => {
     api
       .get(`user/${value}`)
       .then((res) => {
-        if (res.val()) setOpenUserExist(true)
+        if (res) setOpenUserExist(true)
         else setOpenAddUser(true)
       })
       .catch((e) => {
