@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Pressable, View } from 'react-native'
 
 import { Button, Text, useTheme } from 'react-native-paper'
@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
-import { common, input, textNavigation } from '../../../localization/EN'
+import { common, errMsg, input, textNavigation } from '../../../localization/EN'
 import { RoutesTypes } from '../../routes/Routes'
 import { styles } from '../../theme'
 import { QRForm } from '../../components/Input'
@@ -25,17 +25,17 @@ type ISignUpForm = {
 }
 
 const signUpSchema = yup.object({
-  email: yup.string().email().required(),
+  email: yup.string().email(errMsg.invalidEmail).required(errMsg.requiredEmail),
   validateEmail: yup
     .string()
-    .oneOf([yup.ref('email'), ''], 'Does not match')
-    .email()
-    .required(),
-  password: yup.string().required(),
+    .email(errMsg.invalidEmail)
+    .oneOf([yup.ref('email'), ''], errMsg.noSameEmail)
+    .required(errMsg.requiredEmail),
+  password: yup.string().required(errMsg.passwordRequired),
   validatePassword: yup
     .string()
-    .oneOf([yup.ref('password'), ''], 'Does not match')
-    .required(),
+    .oneOf([yup.ref('password'), ''], errMsg.noSamePassword)
+    .required(errMsg.passwordRequired),
   acceptPolicy: yup.bool().isTrue().required(),
 })
 
@@ -44,21 +44,19 @@ export const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
   const {
     control,
     handleSubmit,
-    formState: { isValid, isDirty },
+    formState: { errors, isDirty, isValid },
   } = useForm<ISignUpForm>({
+    mode: 'onBlur',
     resolver: yupResolver<ISignUpForm>(signUpSchema),
-    defaultValues: {
-      acceptPolicy: false,
-      email: '',
-      validateEmail: '',
-      password: '',
-      validatePassword: '',
-    },
   })
 
   const goToLogin = () => navigation.navigate('LoginScreen')
 
   const submit = () => handleSubmit(({ password, email }) => signUpUser({ password, email }))
+
+  useEffect(() => {
+    console.log(errors)
+  }, [errors])
 
   return (
     <ScrollView style={{ ...styles.container }}>
@@ -68,18 +66,35 @@ export const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
         </Text>
         <View style={{ display: 'flex', gap: 30, marginBottom: 60, marginTop: 60 }}>
           <QRForm>
-            <QRForm.InputText control={control} name='email' label={input.email} autoFocus />
-            <QRForm.InputText control={control} name='validateEmail' label={input.validateEmail} />
+            <QRForm.InputText
+              control={control}
+              name='email'
+              label={input.email}
+              error={!!errors.email}
+              errorMessage={errors.email?.message}
+              autoFocus
+            />
+            <QRForm.InputText
+              control={control}
+              name='validateEmail'
+              label={input.validateEmail}
+              error={!!errors.validateEmail}
+              errorMessage={errors.validateEmail?.message}
+            />
             <QRForm.InputText
               control={control}
               name='password'
               label={input.password}
+              error={!!errors.password}
+              errorMessage={errors.password?.message}
               secureTextEntry
             />
             <QRForm.InputText
               control={control}
               name='validatePassword'
               label={input.validatePassword}
+              error={!!errors.validatePassword}
+              errorMessage={errors.validatePassword?.message}
               secureTextEntry
             />
             <View

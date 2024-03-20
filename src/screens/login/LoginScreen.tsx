@@ -6,7 +6,7 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 
-import { common, input, textNavigation } from '../../../localization/EN'
+import { common, errMsg, input, textNavigation } from '../../../localization/EN'
 import { styles } from '../../theme'
 import { RoutesTypes } from '../../routes/Routes'
 import { QRForm } from '../../components/Input'
@@ -20,8 +20,8 @@ type ILoginForm = {
 }
 
 const logInSchema = yup.object({
-  email: yup.string().email().required(),
-  password: yup.string().required(),
+  email: yup.string().email().required(errMsg.requiredEmail),
+  password: yup.string().required(errMsg.passwordRequired),
 })
 
 export const LoginScreen = ({ navigation }: LoginScreenProps) => {
