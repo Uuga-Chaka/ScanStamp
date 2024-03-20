@@ -23,7 +23,7 @@ export const Routes = () => {
           <Stack.Screen name='LoginScreen' component={LoginScreen} />
           <Stack.Screen name='SignUpScreen' component={SignUpScreen} />
         </>
-      ) : currentUser.verified ? (
+      ) : currentUser.validated ? (
         <>
           <Stack.Screen name='HomeScreen' component={HomeScreen} />
           <Stack.Screen name='PermissionScreen' component={PermissionScreen} />
