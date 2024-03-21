@@ -1,11 +1,9 @@
 import { useCallback, useEffect, useState } from 'react'
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
+import toast from 'react-hot-toast/headless'
 
-import { signOut } from '../../services/auth'
 import { useAuthStore } from '../store'
-
-import api from '../../services/api'
-import { UserData } from '../constants/types'
+import { errMsg } from '../../localization/EN'
 
 export const useAuthHandler = () => {
   const [initialazing, setInitialazing] = useState(true)
@@ -15,10 +13,16 @@ export const useAuthHandler = () => {
   const onAuthStateChanged = useCallback(
     (user: FirebaseAuthTypes.User | null) => {
       if (user) {
-        api
-          .get<UserData>(`admin/${user.uid}`)
-          .then((userData) => setCurrentUser(userData))
-          .catch(() => signOut())
+        user
+          .getIdTokenResult(true)
+          .then(({ claims }) => {
+            console.log(claims)
+            setCurrentUser({ ...user, validated: claims.validated as boolean })
+          })
+          .catch(() => {
+            setCurrentUser({ ...user, validated: false })
+            toast.error(errMsg.getUserInfo)
+          })
       } else {
         setCurrentUser(null)
       }

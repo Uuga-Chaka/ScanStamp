@@ -1,10 +1,10 @@
+import { FirebaseAuthTypes } from '@react-native-firebase/auth'
 import { create } from 'zustand'
 
-type UserData = { email: string; uid: string; validated: boolean }
+export type CustomClaims = { validated: boolean }
+export type UserData = FirebaseAuthTypes.User & CustomClaims
 
-type State = {
-  currentUser: UserData | null
-}
+type State = { currentUser: UserData | null }
 
 type Action = {
   updateCurrentUser: (currentUser: State['currentUser']) => void

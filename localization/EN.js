@@ -13,6 +13,7 @@ module.exports = {
     signOut: 'Sign Out',
   },
   errMsg: {
+    getUserInfo: 'There was and error trying to get the user information',
     requiredEmail: 'Email is required',
     passwordRequired: 'Password is requires',
     invalidEmail: 'Email is invalid',
