@@ -6,7 +6,6 @@ import { Button, Text } from 'react-native-paper'
 
 import { buttons } from '../../../localization/EN'
 import { RoutesTypes } from '../../routes/Routes'
-import { colors } from '../../theme'
 
 type SignUpScreenProps = NativeStackScreenProps<RoutesTypes, 'PermissionScreen'>
 
@@ -35,7 +34,6 @@ export const PermissionScreen = ({ navigation }: SignUpScreenProps) => {
         height: '100%',
         width: '100%',
         padding: 20,
-        backgroundColor: colors.white,
         justifyContent: 'center',
         alignItems: 'center',
       }}
