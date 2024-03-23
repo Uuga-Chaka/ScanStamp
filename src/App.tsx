@@ -70,8 +70,8 @@ function App(): React.JSX.Element {
   return (
     <NavigationContainer theme={dTheme as MD3Theme & Theme}>
       <PaperProvider theme={dTheme}>
-        <SafeAreaView style={{ backgroundColor: 'red', flex: 1 }}>
-          <View style={{ backgroundColor: 'red', height: '100%', width: '100%' }}>
+        <SafeAreaView style={{ flex: 1 }}>
+          <View style={{ height: '100%', width: '100%' }}>
             <Routes />
             <Notification />
           </View>
