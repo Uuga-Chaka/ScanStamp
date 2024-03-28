@@ -8,7 +8,7 @@ module.exports = {
     submit: 'Submit',
     yes: 'Yes',
     no: 'No',
-    addPermission: 'Add permission',
+    givePermission: 'Allow application to have access to camera',
     scanQR: 'Scan QR code',
     signOut: 'Sign Out',
   },
@@ -26,6 +26,8 @@ module.exports = {
     userAdded: 'This already exists',
     addUser: 'Add user',
     verifyAddUsers: 'Do you want to add this users to the database?',
+    // eslint-disable-next-line max-len
+    givePermissions: `Es necesario darle permisos a la aplicacion para poder acceder a la camara y tener acceso a todas las funcionalidades de la aplicacion`,
   },
   input: {
     email: 'Email',
