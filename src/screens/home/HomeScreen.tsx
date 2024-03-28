@@ -1,38 +1,31 @@
-import React from 'react'
-import { View } from 'react-native'
-import { useCameraPermission } from 'react-native-vision-camera'
+import React, { useEffect } from 'react'
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { Button } from 'react-native-paper'
+import { useCameraPermission } from 'react-native-vision-camera'
 
-import { buttons } from '../../../localization/EN'
-import { styles } from '../../theme'
-import { RoutesTypes } from '../../routes/Routes'
-import { signOut } from '../../../services/auth'
+import { CameraContainer } from '../camera/CameraScreen'
+import { Profile } from '../profile/Profile'
+import { QRList } from '../qrList/QRList'
+import { QRScan } from '../qrScan/QRScan'
+import { RoutesTypes, TabParamList } from '../../routes/Routes'
 
+const Tab = createMaterialBottomTabNavigator<TabParamList>()
 type HomeScreenProps = NativeStackScreenProps<RoutesTypes, 'HomeScreen'>
 
 export const HomeScreen = ({ navigation }: HomeScreenProps) => {
   const { hasPermission } = useCameraPermission()
 
-  const handlePermission = () =>
-    hasPermission ? navigation.navigate('CameraScreen') : navigation.navigate('PermissionScreen')
+  useEffect(() => {
+    !hasPermission && navigation.navigate('PermissionScreen')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
-    <View
-      style={{
-        ...styles.container,
-        height: '100%',
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-      }}
-    >
-      <Button mode='contained' onPress={handlePermission}>
-        {buttons.scanQR}
-      </Button>
-      <Button mode='outlined' onPress={signOut}>
-        {buttons.signOut}
-      </Button>
-    </View>
+    <Tab.Navigator>
+      <Tab.Screen name='QRScanScreen' component={CameraContainer} />
+      <Tab.Screen name='QRCodeScreen' component={QRScan} />
+      <Tab.Screen name='QRListScreen' component={QRList} />
+      <Tab.Screen name='ProfileScreen' component={Profile} />
+    </Tab.Navigator>
   )
 }

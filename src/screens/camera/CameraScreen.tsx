@@ -7,10 +7,13 @@ import { Dialog } from 'react-native-paper'
 import { AddUserDialog } from './AddUserDialog'
 import { UserExistDialog } from './UserExistDialog'
 import { useUserUplaod } from '../../hooks/useCheckUser'
+import { useIsForeground } from '../../hooks/useIsForeground'
 
 export const CameraContainer = () => {
   const device = useCameraDevice('back')
   const isFocused = useIsFocused()
+  const isForeground = useIsForeground()
+  const isActive = isFocused && isForeground
 
   const {
     handleSubmit,
@@ -42,7 +45,7 @@ export const CameraContainer = () => {
         <Camera
           style={StyleSheet.absoluteFill}
           device={device}
-          isActive={isFocused}
+          isActive={isActive}
           codeScanner={codeScanner}
           enableZoomGesture={true}
         />

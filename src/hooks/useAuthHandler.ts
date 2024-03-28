@@ -17,15 +17,15 @@ export const useAuthHandler = () => {
           .getIdTokenResult(true)
           .then(({ claims }) => {
             setCurrentUser({ ...user, validated: claims.validated as boolean })
-            if (initialazing) setInitialazing(false)
           })
           .catch(() => {
             setCurrentUser({ ...user, validated: false })
-            if (initialazing) setInitialazing(false)
             toast.error(errMsg.getUserInfo)
           })
+          .finally(() => initialazing && setInitialazing(false))
       } else {
         setCurrentUser(null)
+        initialazing && setInitialazing(false)
       }
     },
     [initialazing, setCurrentUser]

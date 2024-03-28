@@ -4,7 +4,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { Camera, CameraPermissionStatus } from 'react-native-vision-camera'
 import { Button, Text } from 'react-native-paper'
 
-import { buttons } from '../../../localization/EN'
+import { buttons, cameraDialog } from '../../../localization/EN'
 import { RoutesTypes } from '../../routes/Routes'
 
 type SignUpScreenProps = NativeStackScreenProps<RoutesTypes, 'PermissionScreen'>
@@ -25,7 +25,7 @@ export const PermissionScreen = ({ navigation }: SignUpScreenProps) => {
   }, [])
 
   useEffect(() => {
-    if (cameraPermissionStatus === 'granted') navigation.navigate('CameraScreen')
+    if (cameraPermissionStatus === 'granted') navigation.navigate('HomeScreen')
   }, [cameraPermissionStatus, navigation])
   return (
     <View
@@ -38,9 +38,10 @@ export const PermissionScreen = ({ navigation }: SignUpScreenProps) => {
         alignItems: 'center',
       }}
     >
+      <Text style={{ marginBottom: 50 }}>{cameraDialog.givePermissions}</Text>
       {cameraPermissionStatus !== 'granted' && (
-        <Button onPress={requestCameraPermission}>
-          <Text>{buttons.addPermission}</Text>
+        <Button mode='outlined' onPress={requestCameraPermission}>
+          {buttons.givePermission}
         </Button>
       )}
     </View>
