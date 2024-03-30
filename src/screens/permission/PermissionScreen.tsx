@@ -27,6 +27,7 @@ export const PermissionScreen = ({ navigation }: SignUpScreenProps) => {
   useEffect(() => {
     if (cameraPermissionStatus === 'granted') navigation.navigate('HomeScreen')
   }, [cameraPermissionStatus, navigation])
+
   return (
     <View
       style={{
