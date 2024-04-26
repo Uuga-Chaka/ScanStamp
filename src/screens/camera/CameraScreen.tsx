@@ -1,7 +1,13 @@
 import React, { useCallback } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { useIsFocused } from '@react-navigation/core'
-import { Camera, Code, useCameraDevice, useCodeScanner } from 'react-native-vision-camera'
+import {
+  Camera,
+  CameraRuntimeError,
+  Code,
+  useCameraDevice,
+  useCodeScanner,
+} from 'react-native-vision-camera'
 import { Dialog } from 'react-native-paper'
 
 import { AddUserDialog } from './AddUserDialog'
@@ -39,6 +45,10 @@ export const CameraContainer = () => {
     onCodeScanned: onCodeScanned,
   })
 
+  const onError = useCallback((e: CameraRuntimeError) => {
+    console.log('error', e)
+  }, [])
+
   return (
     <View style={{ width: '100%', height: '100%' }}>
       {device != null && (
@@ -48,6 +58,7 @@ export const CameraContainer = () => {
           isActive={isActive}
           codeScanner={codeScanner}
           enableZoomGesture={true}
+          onError={onError}
         />
       )}
       <Dialog visible={openAddUser}>
