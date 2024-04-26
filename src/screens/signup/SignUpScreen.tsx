@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Pressable, View } from 'react-native'
 
 import { Button, Text, useTheme } from 'react-native-paper'
@@ -53,10 +53,6 @@ export const SignUpScreen = ({ navigation }: SignUpScreenProps) => {
   const goToLogin = () => navigation.navigate('LoginScreen')
 
   const submit = () => handleSubmit(({ password, email }) => signUpUser({ password, email }))
-
-  useEffect(() => {
-    console.log(errors)
-  }, [errors])
 
   return (
     <ScrollView style={{ ...styles.container }}>
