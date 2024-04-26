@@ -1,5 +1,7 @@
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
 
+if (__DEV__) auth().useEmulator('http://10.0.2.2:9099')
+
 export const signUpUser = ({ email, password }: { email: string; password: string }) => {
   auth()
     .createUserWithEmailAndPassword(email, password)

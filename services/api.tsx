@@ -1,5 +1,6 @@
 import database from '@react-native-firebase/database'
 
+if (__DEV__) database().useEmulator('http://10.0.2.2', 9000)
 const dbRef = database().ref('/api/')
 
 const get = async <T,>(url: string): Promise<T> => {

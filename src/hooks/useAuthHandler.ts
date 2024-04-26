@@ -5,6 +5,8 @@ import toast from 'react-hot-toast/headless'
 import { useAuthStore } from '../store'
 import { errMsg } from '../../localization/EN'
 
+if (__DEV__) auth().useEmulator('http://10.0.2.2:9099')
+
 export const useAuthHandler = () => {
   const [initialazing, setInitialazing] = useState(true)
   const currentUser = useAuthStore((authStore) => authStore.currentUser)
