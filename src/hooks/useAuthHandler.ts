@@ -21,7 +21,7 @@ export const useAuthHandler = () => {
             setCurrentUser({ ...user, validated: claims.validated as boolean })
           })
           .catch(() => {
-            setCurrentUser({ ...user, validated: false })
+            setCurrentUser(null)
             toast.error(errMsg.getUserInfo)
           })
           .finally(() => initialazing && setInitialazing(false))
